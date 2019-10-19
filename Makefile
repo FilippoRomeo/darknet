@@ -1,6 +1,6 @@
 GPU=1
 CUDNN=1
-CUDNN_HALF=1
+CUDNN_HALF=0
 OPENCV=1
 AVX=0
 OPENMP=1
@@ -40,7 +40,7 @@ OS := $(shell uname)
 # ARCH= -gencode arch=compute_53,code=[sm_53,compute_53]
 
 # For Jetson Tx2 or Drive-PX2 uncomment:
-# ARCH= -gencode arch=compute_62,code=[sm_62,compute_62]
+ARCH= -gencode arch=compute_62,code=[sm_62,compute_62]
 
 
 VPATH=./src/
