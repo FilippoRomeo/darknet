@@ -1,3 +1,25 @@
+# Fork of darknet for NVIDIA Jetson devices
+
+This fork of darknet provides a convenient way to compile it for NVIDIA Jetson devices, with all the necessary optimizations for each platform:
+
+- Jetson Nano
+- Jetson TX2
+- Jetson AGX Xavier
+
+# Instructions
+
+```Shell
+export DEVICE="nano" #'nano' or 'tx2' or 'xavier' <--- choose your jetson device
+git clone http://github.com/dataplayer12/darknet.git
+cd darknet
+git checkout $DEVICE
+if [$DEVICE -eq "nano"]
+export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
+sudo make
+```
+
 # Yolo-v3 and Yolo-v2 for Windows and Linux
 ### (neural network for object detection) - Tensor Cores can be used on [Linux](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux) and [Windows](https://github.com/AlexeyAB/darknet#how-to-compile-on-windows-using-vcpkg)
 
