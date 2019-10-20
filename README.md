@@ -17,8 +17,8 @@ if [ "$DEVICE" == "nano" ]; then
 	export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
 	export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 else
-	echo "$PATH"
-	echo "$LD_LIBRARY_PATH"
+	echo $PATH
+	echo $LD_LIBRARY_PATH
 fi
 sudo make
 ```
