@@ -13,9 +13,12 @@ export DEVICE="nano" #'nano' or 'tx2' or 'xavier' <--- choose your jetson device
 git clone http://github.com/dataplayer12/darknet.git
 cd darknet
 git checkout $DEVICE
-if [$DEVICE -eq "nano"]
-export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+if [ "$DEVICE" == "nano" ]; then
+	export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+	export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+else
+	echo "$PATH"
+	echo "$LD_LIBRARY_PATH"
 fi
 sudo make
 ```
