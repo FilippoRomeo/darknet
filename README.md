@@ -21,6 +21,9 @@ else
 	echo $LD_LIBRARY_PATH
 fi
 sudo make
+
+#If you get nvcc not found error on `make` command, please login as super user: `sudo su` and run make again.
+
 ```
 
 # Yolo-v3 and Yolo-v2 for Windows and Linux
