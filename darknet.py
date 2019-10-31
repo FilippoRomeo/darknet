@@ -195,6 +195,9 @@ load_image = lib.load_image_color
 load_image.argtypes = [c_char_p, c_int, c_int]
 load_image.restype = IMAGE
 
+free_network = lib.api_free_network
+free_network.argtypes = [c_void_p]
+
 rgbgr_image = lib.rgbgr_image
 rgbgr_image.argtypes = [IMAGE]
 

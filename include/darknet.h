@@ -825,6 +825,7 @@ LIB_API network *load_network(char *cfg, char *weights, int clear);
 
 // network.c
 LIB_API load_args get_base_args(network *net);
+LIB_API void api_free_network(network *net);
 
 // box.h
 LIB_API void do_nms_sort(detection *dets, int total, int classes, float thresh);

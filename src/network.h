@@ -158,6 +158,7 @@ float get_network_cost(network net);
 //LIB_API int network_width(network *net);
 //LIB_API int network_height(network *net);
 //LIB_API void optimize_picture(network *net, image orig, int max_layer, float scale, float rate, float thresh, int norm);
+void api_free_network(network *net);
 
 int get_network_nuisance(network net);
 int get_network_background(network net);

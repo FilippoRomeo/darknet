@@ -734,6 +734,44 @@ void custom_get_region_detections(layer l, int w, int h, int net_w, int net_h, f
     correct_yolo_boxes(dets, l.w*l.h*l.n, w, h, net_w, net_h, relative, letter);
 }
 
+//free memory function copied from: https://github.com/AlexeyAB/darknet/issues/3467
+void api_free_network(network *net)
+{
+    int i;
+    for (i = 0; i < (*net).n; ++i) {
+        free_layer((*net).layers[i]);
+    }
+    free((*net).layers);
+
+    free((*net).seq_scales);
+    free((*net).scales);
+    free((*net).steps);
+    free((*net).seen);
+
+#ifdef GPU
+    if (gpu_index >= 0) cuda_free((*net).workspace);
+    else free((*net).workspace);
+    if ((*net).input_state_gpu) cuda_free((*net).input_state_gpu);
+    if ((*net).input_pinned_cpu) {   // CPU
+        if ((*net).input_pinned_cpu_flag) cudaFreeHost((*net).input_pinned_cpu);
+        else free((*net).input_pinned_cpu);
+    }
+    if (*(*net).input_gpu) cuda_free(*(*net).input_gpu);
+    if (*(*net).truth_gpu) cuda_free(*(*net).truth_gpu);
+    if ((*net).input_gpu) free((*net).input_gpu);
+    if ((*net).truth_gpu) free((*net).truth_gpu);
+
+    if (*(*net).input16_gpu) cuda_free(*(*net).input16_gpu);
+    if (*(*net).output16_gpu) cuda_free(*(*net).output16_gpu);
+    if ((*net).input16_gpu) free((*net).input16_gpu);
+    if ((*net).output16_gpu) free((*net).output16_gpu);
+    if ((*net).max_input16_size) free((*net).max_input16_size);
+    if ((*net).max_output16_size) free((*net).max_output16_size);
+#else
+    free((*net).workspace);
+#endif
+}
+
 void fill_network_boxes(network *net, int w, int h, float thresh, float hier, int *map, int relative, detection *dets, int letter)
 {
     int prev_classes = -1;
